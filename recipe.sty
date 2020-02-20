@@ -1,0 +1,71 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{recipe}[2020/02/09 Recipe package]
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{multicol}
+\RequirePackage{enumitem}
+\RequirePackage{calc}
+
+\newenvironment{recipe}[1]
+{
+	\newenvironment{ingredients}[1][1]
+	{
+		\newenvironment{ingredientgroup}[2]
+		{
+			\newcommand{\ingredient}[1]{\item[\textbf{########1}]}
+			\noindent\rule{\columnwidth}{0.4pt}
+			{\Large ####1}
+			\begin{enumerate}[itemsep=0cm,labelindent=0pt,labelwidth=\widthof{####2}+1em,label=\arabic*.,itemindent=1em,leftmargin=!]
+		}
+		{
+			\end{enumerate}
+		}
+		\def\numCols{##1}
+		{\huge Ingredients}
+		\if##11
+			\\
+		\else
+			\vspace{-0.4cm}
+			\begin{multicols}{##1}
+		\fi
+	}
+	{
+		\if\numCols1
+		\else
+			\end{multicols}
+		\fi
+	}
+	\newenvironment{procedure}[1][1]
+	{
+		\newenvironment{proceduregroup}[1]
+		{
+			\newcommand{\step}{\item}
+			\noindent\rule{\columnwidth}{0.3pt}
+			{\Large ####1}
+			\begin{enumerate}[itemsep=0cm]
+		}
+		{
+			\end{enumerate}
+		}
+		\def\numCols{##1}
+		{\huge Procedure}
+		\if##11
+			\\
+		\else
+			\vspace{-0.4cm}
+			\begin{multicols}{##1}
+		\fi
+	}
+	{
+		\if\numCols1
+		\else
+			\end{multicols}
+		\fi
+	}
+	\begin{center}
+		\Huge
+		\textbf{#1}
+	\end{center}
+	\vspace{0.5cm}
+}
+{}
