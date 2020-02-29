@@ -10,12 +10,12 @@
 {
 	\newenvironment{ingredients}[1][1]
 	{
-		\newenvironment{ingredientgroup}[2]
+		\newenvironment{ingredientgroup}[2][A pinch]
 		{
 			\newcommand{\ingredient}[1]{\item[\textbf{########1}]}
 			\noindent\rule{\columnwidth}{0.4pt}
-			{\Large ####1}
-			\begin{enumerate}[itemsep=0cm,labelindent=0pt,labelwidth=\widthof{####2}+1em,label=\arabic*.,itemindent=1em,leftmargin=!]
+			{\Large ####2}
+			\begin{enumerate}[itemsep=0cm,labelindent=0pt,labelwidth=\widthof{####1}+1em,label=\arabic*.,itemindent=1em,leftmargin=!]
 		}
 		{
 			\end{enumerate}
