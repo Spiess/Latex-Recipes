@@ -13,6 +13,7 @@
 		\newenvironment{ingredientgroup}[2][A pinch]
 		{
 			\newcommand{\ingredient}[1]{\item[\textbf{########1}]}
+			\newcommand{\ing}{\ingredient}
 			\noindent\rule{\columnwidth}{0.4pt}
 			{\Large ####2}
 			\begin{enumerate}[itemsep=0cm,labelindent=0pt,labelwidth=\widthof{####1}+1em,label=\arabic*.,itemindent=1em,leftmargin=!]
@@ -20,7 +21,7 @@
 		{
 			\end{enumerate}
 		}
-		\def\numCols{##1}
+		\def\num@Cols{##1}
 		{\huge Ingredients}
 		\if##11
 			\\
@@ -30,7 +31,7 @@
 		\fi
 	}
 	{
-		\if\numCols1
+		\if\num@Cols1
 		\else
 			\end{multicols}
 		\fi
@@ -47,7 +48,7 @@
 		{
 			\end{enumerate}
 		}
-		\def\numCols{##1}
+		\def\num@Cols{##1}
 		{\huge Procedure}
 		\if##11
 			\\
@@ -57,7 +58,7 @@
 		\fi
 	}
 	{
-		\if\numCols1
+		\if\num@Cols1
 		\else
 			\end{multicols}
 		\fi
