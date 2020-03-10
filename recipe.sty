@@ -5,11 +5,20 @@
 \RequirePackage{multicol}
 \RequirePackage{enumitem}
 \RequirePackage{calc}
+\RequirePackage{xkeyval}
+
+% xkeyval keys
+\define@cmdkeys[recipe]{ingredients}{name,columns}
+\presetkeys[recipe]{ingredients}{name=Ingredients,columns=1}{}
+
+\define@cmdkeys[recipe]{procedure}{name,columns}
+\presetkeys[recipe]{procedure}{name=Procedure,columns=1}{}
 
 \newenvironment{recipe}[1]
 {
-	\newenvironment{ingredients}[1][1]
+	\newenvironment{ingredients}[1][]
 	{
+		\setkeys[recipe]{ingredients}{##1}
 		\newenvironment{ingredientgroup}[2][A pinch]
 		{
 			\newcommand{\ingredient}[1]{\item[\textbf{########1}]}
@@ -21,23 +30,23 @@
 		{
 			\end{enumerate}
 		}
-		\def\num@Cols{##1}
-		{\huge Ingredients}
-		\if##11
+		{\huge \cmdrecipe@ingredients@name}
+		\if\cmdrecipe@ingredients@columns1
 			\\
 		\else
 			\vspace{-0.4cm}
-			\begin{multicols}{##1}
+			\begin{multicols}{\cmdrecipe@ingredients@columns}
 		\fi
 	}
 	{
-		\if\num@Cols1
+		\if\cmdrecipe@ingredients@columns1
 		\else
 			\end{multicols}
 		\fi
 	}
-	\newenvironment{procedure}[1][1]
+	\newenvironment{procedure}[1][]
 	{
+		\setkeys[recipe]{procedure}{##1}
 		\newenvironment{proceduregroup}[1]
 		{
 			\newcommand{\step}{\item}
@@ -48,17 +57,16 @@
 		{
 			\end{enumerate}
 		}
-		\def\num@Cols{##1}
-		{\huge Procedure}
-		\if##11
+		{\huge \cmdrecipe@procedure@name}
+		\if\cmdrecipe@procedure@columns1
 			\\
 		\else
 			\vspace{-0.4cm}
-			\begin{multicols}{##1}
+			\begin{multicols}{\cmdrecipe@procedure@columns}
 		\fi
 	}
 	{
-		\if\num@Cols1
+		\if\cmdrecipe@procedure@columns1
 		\else
 			\end{multicols}
 		\fi
